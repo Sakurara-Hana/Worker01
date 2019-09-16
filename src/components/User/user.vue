@@ -7,10 +7,11 @@
         class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
-        background-color="#545c64"
-        text-color="#fff"
+        background-color="#fff"
+        text-color="#000"
         active-text-color="#558FF2"
       >
+       <!-- background-color="#545c64" -->
         <el-menu-item index="1" @click="getStudentList">学生</el-menu-item>
         <el-submenu index="2">
           <template slot="title">我的工作台</template>
@@ -24,11 +25,10 @@
             <el-menu-item index="2-4-3">选项3</el-menu-item>
           </el-submenu>
         </el-submenu>
-        <!-- <el-menu-item index="3" disabled>消息中心</el-menu-item> -->
+        <el-menu-item index="3" disabled>消息中心</el-menu-item> -->
         <el-menu-item index="3" @click="getTeacherList">教师</el-menu-item>
         <el-menu-item index="4" @click="getAdminList">
           管理员
-          <!-- <a href="https://www.ele.me" target="_blank">订单管理</a> -->
         </el-menu-item>
       </el-menu>
     </header>
@@ -167,7 +167,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import "//at.alicdn.com/t/font_1274766_o0pvcf7vswh.css";
 * {
   margin: 0;
@@ -184,25 +184,48 @@ export default {
 }
 header {
   display: flex;
-  background-color: #545c64;
+  
+  background-color:#fff;
   justify-content: space-between;
   padding: 0 20px;
   align-items: center;
   color: aliceblue;
+  border-bottom: 1px solid #ccc;
+  /* position: relative; */
+}
+div.logo{
+  font-size: 40px;
+  color: aqua;
+}
+ header .el-menu-demo li.el-menu-item{
+  /* padding: 0 10px; */
+  margin: 0 10px;
 }
 .se_wrap {
   height: calc(100vh - 61px);
+  width: 100%;
 
   display: flex;
+  position: relative;
+ 
 }
 nav {
   width: 200px;
-  background-color: #545c64;
+  height: 100%;
+  position: fixed;
+  top: 61px;
+  bottom: 0;
+  left: 0;
+  /* background-color: #545c64; */
+
 }
 article {
   flex: 1;
   /* background-color:red; */
   padding: 10px;
+  position: relative;
+  margin-left:210px;
+  overflow-x: hidden;
 }
 a{
   text-decoration: none;
