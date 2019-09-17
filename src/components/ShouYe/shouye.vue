@@ -618,21 +618,21 @@ div.el-pagination {
 
 /* 弹出层区域 */
 div.el-dialog{
-  width: 40%;
+  /* width: 40%; */
 }
 div.el-form-item__content{
-  margin-left: 60px !important;
+  /* margin-left: 60px !important; */
 }
 
 div.el-date-picker{
   /* width: 100%; */
 }
 div.el-input{
-  width: 70%;
+  /* width: 70%; */
 }
 div.el-select {
    /* margin-left: 60px ; */
    
-   width: 80%;
+   /* width: 80%; */
 }
 </style>

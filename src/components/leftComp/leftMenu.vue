@@ -1,10 +1,16 @@
 <template>
   <div class="leftMenu">
  
-    <label v-for="leftMenu in leftMenus">
+    <label v-for="leftMenu in leftMenus" 
+    @click="getRef" 
+    >
     	<!--只有一级菜单-->
       <el-menu-item v-if="leftMenu.child.length==0&&leftMenu"
-                    :key="leftMenu.id" :data="leftMenu" :index="leftMenu.id.toString()" :route='leftMenu.component'
+                    :key="leftMenu.id" 
+                    :data="leftMenu" 
+                    :index="leftMenu.id.toString()" 
+                    :route='leftMenu.component'
+                 
                     >
           <!--图标-->
        <svg-icon :icon-class="leftMenu.path" />
@@ -15,7 +21,7 @@
       <el-submenu v-if="leftMenu.child.length!=0&&leftMenu.child"
                   :key="leftMenu.id" :data="leftMenu" :index="leftMenu.id.toString()">
                   
-        <template slot="title">
+        <template  slot="title">
           <!-- <i class="user"></i> -->
           <svg-icon :icon-class="leftMenu.path" />
           {{leftMenu.title}}
@@ -36,10 +42,28 @@
   export default {
     name: 'LeftMenu', //使用递归组件必须要有
     props: ['leftMenus'], // 传入子组件的数据
+   
     data() {
-      return {}
+      return {
+       
+         
+      }
     },
-    methods: {}
+    methods: {
+      getRef(index){
+        console.log(index);
+        var smallTabObj={name:'h',url:'url'};
+        // var reg=/(?=\/#\/)[\w]+/g;
+        // console.log(index.target.baseURI.match(reg));
+        // console.log(index.target.innerText);
+        if(index.target.childNodes.length!=3){
+        smallTabObj.name=index.target.innerText;
+        smallTabObj.url=index.target.baseURI;
+        this.$emit("getBarName",smallTabObj);
+        } 
+        
+      }
+    }
   }
 </script>
  

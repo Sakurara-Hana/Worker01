@@ -44,11 +44,25 @@
          :router="true"           
         >
          <!-- :router="true"   -->
-        <left-menu :leftMenus='userList'></left-menu>
+        <left-menu @getBarName="getBar" :leftMenus='userList'></left-menu>
            </el-menu>
       </nav>
       <article>
-            <router-view></router-view>
+        <!-- 小路由button模块 需要左侧导航传来数据-->
+          <div class="small_tab">
+            <ul class="tab_content" >
+              <li>
+                <span class="bar_name">系统管理</span>
+                
+              </li>
+              <li v-for="item in small_bar" :key="item.url">
+                <span class="bar_name" @click="routerPage(item.url)">{{item.name}}</span>
+                <span class="bar_icon" @click="delBar(item.url)">X</span>
+                </li>
+            </ul>
+          </div>
+          <!-- 组件，表格部分 -->
+            <router-view ></router-view>
       </article>
     </section>
   </div>
@@ -58,7 +72,7 @@ import LeftMenu from '../leftComp/leftMenu'
 export default {
   created() {
      var _this=this;
-    this.$axios.get('http://192.168.50.198//index.php/web/menu/getMenuList').
+    this.$axios.get('http://192.168.50.198/index.php/web/menu/getMenuList').
     then(function (response) {  
     _this.userList=response.data.data;
     console.log(_this.userList);
@@ -72,6 +86,8 @@ export default {
   },
   data() {
     return {
+      small_bar:[  
+        ],
       currentSelectBtn:'course',
       course:'课表',
       activeIndex: "1",
@@ -147,7 +163,40 @@ export default {
   components: {
     LeftMenu
   },
+  computed:{
+     
+   
+  },
   methods: {
+    // 从子组件获得点击的bar的数据，放到数组中
+    getBar(barName){
+      var flag=false;
+      this.small_bar.map(res=>{
+        if(res.name==barName.name){
+           return  flag=true;
+        }
+      })
+      if(flag==false){
+        this.small_bar.push(barName);
+      }
+    
+    //  console.log(this.small_bar);    
+    },
+    // 删除小导航
+    delBar(url){
+      this.small_bar.map((item,index)=>{
+        if(item.url==url){
+          this.small_bar.splice(index,1);
+        }
+      })
+    },
+    // 小导航跳转
+    routerPage(url){
+      console.log(url);
+      var reg=/(?=[#][/])[\w]+/g;
+      console.log(url.match(reg));
+       this.$router.push(url);
+    },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -226,6 +275,41 @@ article {
   position: relative;
   margin-left:210px;
   overflow-x: hidden;
+}
+/* 头部小导航 */
+div.small_tab{
+  height: 40px;
+  width: 100%;
+  background-color: red;
+  margin-bottom: 5px;
+}
+div.small_tab ul {
+  height: 100%;
+  width: 100%;
+  background-color: green;
+  display: flex;
+  
+}
+div.small_tab ul li{
+  margin: 0 3px;
+  height: 70%;
+  padding: 0 2px;
+  background-color: yellow;
+  
+}
+div.small_tab ul li span.bar_name{
+  /* background-color: seagreen; */
+  padding: 0 4px;
+  cursor: pointer;
+}
+div.small_tab ul li span.bar_icon{
+
+padding: 0 4px;
+border-radius: 10px;
+}
+div.small_tab ul li span.bar_icon:hover{
+background-color: skyblue;
+cursor: pointer;
 }
 a{
   text-decoration: none;

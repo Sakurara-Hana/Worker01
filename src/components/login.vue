@@ -81,20 +81,30 @@ export default {
 			  // permission: 1,
 			  // status: 1,
         // child: []
-        //  id: 20,
-        // title: "好友列表",
-        //   sort: 1,
-        // component: "friendsList",
+          // id:2,
+          // title: "用户管理",
+          // sort: 2,
+          // component:null,
 
-        //  id: 15,
-        // title: "新增好友",
-        //   sort: 2,
-        // component: "addFriends",
+         id: 17,
+        title: "机器列表",
+          sort: 1,
+        component:'machineList',
 
-        //  id: 14,
-        // title: "修改任务",
-        //   sort: 3,
-        // component: "editMaster",
+        //  id: 4,
+        // title: "任务管理",
+        //   sort: 4,
+        // component: " ",
+
+        //  id: 5,
+        // title: "主号管理",
+        //   sort: 5,
+        // component: " ",
+
+        //  id: 6,
+        // title: "好友管理",
+        //   sort: 6,
+        // component: " ",
 
         }
       ).then(function(response){
